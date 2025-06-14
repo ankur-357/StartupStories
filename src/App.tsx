@@ -6,40 +6,41 @@ import { Footer } from './components/Layout/Footer';
 import { Home } from './pages/Home';
 import { CaseStudies } from './pages/CaseStudies';
 import { CaseStudyDetail } from './pages/CaseStudyDetail';
-import { EditCaseStudy } from './pages/EditCaseStudy';
-import { Write } from './pages/Write';
-import { Profile } from './pages/Profile';
-import { LoginForm } from './components/Auth/LoginForm';
-import { SignupForm } from './components/Auth/SignupForm';
-import { NotFound } from './pages/NotFound';
+import { LoginForm as Login } from './components/Auth/LoginForm';
+import { SignupForm as Signup } from './components/Auth/SignupForm';
 import { Dashboard } from './pages/Dashboard';
+import { Write } from './pages/Write';
+import { NotFound } from './pages/NotFound';
+import { Profile } from './pages/Profile';
 import { CategoryPage } from './pages/CategoryPage';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-white flex flex-col">
+    <Router>
+      <AuthProvider>
+        <div className="min-h-screen flex flex-col">
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black">
+            Skip to main content
+          </a>
           <Header />
-          <main className="flex-1">
+          <main id="main-content" className="flex-1">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/case-studies" element={<CaseStudies />} />
               <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
-              <Route path="/case-studies/:id/edit" element={<EditCaseStudy />} />
-              <Route path="/category/:categoryName" element={<CategoryPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/write" element={<Write />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/signup" element={<SignupForm />} />
+              <Route path="/category/:categoryName" element={<CategoryPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
         </div>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 
