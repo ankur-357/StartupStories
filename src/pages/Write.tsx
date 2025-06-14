@@ -8,7 +8,7 @@ import { RichTextEditor } from '../components/Editor/RichTextEditor';
 export function Write() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [title, setTitle] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
@@ -32,7 +32,7 @@ export function Write() {
       .from('categories')
       .select('*')
       .order('name');
-    
+
     setCategories(data || []);
   };
 
@@ -104,17 +104,17 @@ export function Write() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Write Your Case Study</h1>
-            <div className="flex space-x-3">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Write Your Case Study</h1>
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-2 sm:space-x-3">
               <button
                 onClick={() => handleSave(false)}
                 disabled={saving}
-                className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                className="flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 w-full sm:w-auto"
               >
                 <Save className="w-4 h-4" />
                 <span>Save Draft</span>
@@ -122,7 +122,7 @@ export function Write() {
               <button
                 onClick={() => handleSave(true)}
                 disabled={saving}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 w-full sm:w-auto"
               >
                 <Eye className="w-4 h-4" />
                 <span>Publish</span>
@@ -132,8 +132,8 @@ export function Write() {
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <div className="space-y-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Title */}
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
@@ -169,7 +169,7 @@ export function Write() {
               <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700 mb-2">
                 Cover Image URL
               </label>
-              <div className="flex space-x-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:space-x-3">
                 <input
                   type="url"
                   id="coverImage"
@@ -180,7 +180,7 @@ export function Write() {
                 />
                 <button
                   type="button"
-                  className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors w-full sm:w-auto"
                 >
                   <Upload className="w-4 h-4" />
                   <span>Upload</span>
@@ -191,7 +191,7 @@ export function Write() {
                   <img
                     src={coverImage}
                     alt="Cover preview"
-                    className="w-full h-48 object-cover rounded-lg"
+                    className="w-full h-32 sm:h-48 object-cover rounded-lg"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
@@ -201,7 +201,7 @@ export function Write() {
             </div>
 
             {/* Category and Tags */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
                   Category

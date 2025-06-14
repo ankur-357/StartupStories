@@ -32,7 +32,6 @@ export const Dashboard: React.FC = () => {
             }
 
             try {
-                // Fetch user's case studies
                 const { data: caseStudies, error: caseStudiesError } = await supabase
                     .from('case_studies')
                     .select('*')
@@ -41,13 +40,12 @@ export const Dashboard: React.FC = () => {
 
                 if (caseStudiesError) throw caseStudiesError;
 
-                // Calculate total views
                 const totalViews = caseStudies.reduce((sum, study) => sum + (study.views || 0), 0);
 
                 setStats({
                     totalCaseStudies: caseStudies.length,
                     totalViews,
-                    recentCaseStudies: caseStudies.slice(0, 5), // Get 5 most recent case studies
+                    recentCaseStudies: caseStudies.slice(0, 5),
                 });
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
@@ -68,45 +66,46 @@ export const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8">
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">Dashboard</h1>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+            {/* Header Section */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
                 <button
                     onClick={() => navigate('/write')}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                    className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm sm:text-base"
                 >
                     Write New Case Study
                 </button>
             </div>
 
             {/* Stats Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Case Studies</h3>
-                    <p className="text-3xl font-bold text-blue-600">{stats.totalCaseStudies}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-2">Total Case Studies</h3>
+                    <p className="text-2xl sm:text-3xl font-bold text-blue-600">{stats.totalCaseStudies}</p>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Views</h3>
-                    <p className="text-3xl font-bold text-blue-600">{stats.totalViews}</p>
+                <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-2">Total Views</h3>
+                    <p className="text-2xl sm:text-3xl font-bold text-blue-600">{stats.totalViews}</p>
                 </div>
             </div>
 
             {/* Recent Case Studies */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-                <div className="p-6 border-b border-gray-200">
-                    <h2 className="text-xl font-semibold">Recent Case Studies</h2>
+                <div className="p-4 sm:p-6 border-b border-gray-200">
+                    <h2 className="text-lg sm:text-xl font-semibold">Recent Case Studies</h2>
                 </div>
                 <div className="divide-y divide-gray-200">
                     {stats.recentCaseStudies.length > 0 ? (
                         stats.recentCaseStudies.map((study) => (
                             <div
                                 key={study.id}
-                                className="p-6 hover:bg-gray-50 transition-colors cursor-pointer"
+                                className="p-4 sm:p-6 hover:bg-gray-50 transition-colors cursor-pointer"
                                 onClick={() => navigate(`/case-studies/${study.id}`)}
                             >
-                                <div className="flex justify-between items-start">
+                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                     <div>
-                                        <h3 className="text-lg font-medium text-gray-900 mb-1">{study.title}</h3>
+                                        <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-1">{study.title}</h3>
                                         <p className="text-sm text-gray-500">
                                             {new Date(study.created_at).toLocaleDateString()}
                                         </p>
@@ -118,7 +117,7 @@ export const Dashboard: React.FC = () => {
                             </div>
                         ))
                     ) : (
-                        <div className="p-6 text-center text-gray-500">
+                        <div className="p-4 sm:p-6 text-center text-gray-500">
                             No case studies yet. Start writing your first case study!
                         </div>
                     )}

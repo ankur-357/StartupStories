@@ -9,7 +9,7 @@ export function Profile() {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     username: '',
     full_name: '',
@@ -53,7 +53,7 @@ export function Profile() {
 
   const handleSave = async () => {
     setSaving(true);
-    
+
     try {
       const { error } = await supabase
         .from('profiles')
@@ -99,38 +99,38 @@ export function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-32"></div>
-          
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-24 sm:h-32"></div>
+
           {/* Profile Content */}
-          <div className="relative px-6 pb-6">
+          <div className="relative px-4 sm:px-6 pb-4 sm:pb-6">
             {/* Avatar */}
-            <div className="absolute -top-16 left-6">
-              <div className="w-32 h-32 bg-white rounded-full border-4 border-white shadow-lg flex items-center justify-center">
-                <div className="w-28 h-28 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                  <User className="w-12 h-12 text-white" />
+            <div className="absolute -top-12 sm:-top-16 left-4 sm:left-6">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 bg-white rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+                <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <User className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
                 </div>
               </div>
             </div>
 
             {/* Edit Button */}
-            <div className="pt-4 flex justify-end">
+            <div className="pt-4 flex justify-end mt-8">
               {!editing ? (
                 <button
                   onClick={() => setEditing(true)}
-                  className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors w-full sm:w-auto"
                 >
                   <Edit3 className="w-4 h-4" />
                   <span>Edit Profile</span>
                 </button>
               ) : (
-                <div className="flex space-x-3">
+                <div className="flex flex-col sm:flex-row gap-2 sm:space-x-3 w-full sm:w-auto">
                   <button
                     onClick={handleCancel}
-                    className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors w-full sm:w-auto"
                   >
                     <X className="w-4 h-4" />
                     <span>Cancel</span>
@@ -138,7 +138,7 @@ export function Profile() {
                   <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                    className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 w-full sm:w-auto"
                   >
                     <Save className="w-4 h-4" />
                     <span>{saving ? 'Saving...' : 'Save'}</span>
@@ -148,10 +148,10 @@ export function Profile() {
             </div>
 
             {/* Profile Info */}
-            <div className="mt-8 ml-40">
+            <div className="mt-16 sm:mt-8 sm:ml-40">
               {editing ? (
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Full Name
@@ -189,7 +189,7 @@ export function Profile() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Website
@@ -230,21 +230,21 @@ export function Profile() {
                 </div>
               ) : (
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     {profile?.full_name || profile?.username}
                   </h1>
                   <p className="text-gray-600 mb-4">@{profile?.username}</p>
-                  
+
                   {profile?.bio && (
                     <p className="text-gray-700 mb-6">{profile.bio}</p>
                   )}
 
-                  <div className="flex items-center space-x-6 text-sm text-gray-600">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-2 sm:space-y-0 text-sm text-gray-600">
                     <div className="flex items-center space-x-2">
                       <Mail className="w-4 h-4" />
                       <span>{user?.email}</span>
                     </div>
-                    
+
                     {profile?.website && (
                       <a
                         href={profile.website}
@@ -256,7 +256,7 @@ export function Profile() {
                         <span>Website</span>
                       </a>
                     )}
-                    
+
                     {profile?.twitter && (
                       <a
                         href={`https://twitter.com/${profile.twitter.replace('@', '')}`}
@@ -268,7 +268,7 @@ export function Profile() {
                         <span>Twitter</span>
                       </a>
                     )}
-                    
+
                     {profile?.linkedin && (
                       <a
                         href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`}
